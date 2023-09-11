@@ -9,7 +9,10 @@ const Header = () => {
                         <a href='/'>tenor</a>
                     </h6>
                     <div>
-                        <a href='/' className={headerStyle.createBtn}>Create</a>
+                        <a href='/' className={headerStyle.createBtn}>
+
+                            Create
+                            </a>
                         <a href='/' className={headerStyle.signInBtn}>Sign In</a>
                     </div>
                 </nav>
