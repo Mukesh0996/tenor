@@ -2,16 +2,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBarStyles from './Searchbar.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { tenorURL } from '../../utils/API';
 
 
 const SearchBar = () => {
 
-
     const [searchInput, setSearchInput] = useState('');
+
+
+    const fetchGifs = async() => {
+
+        let url = tenorURL.concat(searchInput);
+        const result = await fetch(url, {
+            method:"GET"
+        });
+        const res = await result.json();
+       return res;
+    }
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-       console.log(searchInput);
+       console.log(fetchGifs());
     }
 
     return <div className={SearchBarStyles.searchDiv}>

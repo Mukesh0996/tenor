@@ -1,0 +1,21 @@
+
+
+.trendingContainer {
+    width: 75%;
+    margin: auto;
+    margin-top: 1rem;   
+}
+
+.trendingContainer h3 {
+    color: black;
+}
+
+.carousel {
+    width: 100%;
+    margin-top: 1rem;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+}

@@ -1,3 +1,4 @@
-export const tenorURL = ""
+const tenorAPIKey = 'LIVDSRZULELA'
+export const tenorURL = `https://g.tenor.com/v1/search?key=${tenorAPIKey}&locale=en_US&q=`;
 
-export const tenorAPILey ='AIzaSyAgfIvc3DqI195-oQMNLbfsSsy-bMBx-Os';
+export const trendingURL = `https://g.tenor.com/v1/search?key=${tenorAPIKey}`
