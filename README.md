@@ -21,6 +21,9 @@ ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor
 
 [`Trending`]() - Used this component for displaying the trending GIfs in the app. Implemented [`Carousel`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Carousel) effect in this component.
 
+-----
+
+
 ### `Available Custom Hooks`
 
 
