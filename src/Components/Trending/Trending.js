@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TrendingStyles from './Trending.module.css';
 import { trendingURL } from '../../Utils/API';
-import GIf from '../Gif/GIf';
+import Gif from '../Gif/GIf';
 import Carousel from '../Carousel/Carousel';
 import useFetch from '../../Hooks/useFetch';
 import Loading from '../Loading/Loading';
@@ -31,7 +31,7 @@ const Trending = () => {
                 <h3>Trending Tenor Searches</h3>
                     <Carousel> 
                         { 
-                            trendingGifs.map((gif, index)=> <GIf key={index} gifUrl={gif.media[0].gif.url} desc={gif.content_description}/>) 
+                            trendingGifs.map((gif, index)=> <Gif key={index} gifUrl={gif.media[0].gif.url} desc={gif.content_description}/>) 
                         } 
                     </Carousel>
             </div>  

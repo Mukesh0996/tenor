@@ -7,7 +7,7 @@ import { SearchContext } from '../../Store/SearchContext';
 
 
 
-const GIf = React.forwardRef((props, ref) => {
+const Gif = React.forwardRef((props, ref) => {
     
     const {setSearchKey , setSearchResults} = useContext(SearchContext);
 
@@ -30,4 +30,4 @@ const GIf = React.forwardRef((props, ref) => {
 })
 
 
-export default GIf;
+export default Gif;

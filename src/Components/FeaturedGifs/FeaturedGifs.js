@@ -2,7 +2,7 @@ import { createRef, useEffect, useState } from 'react';
 import { featuredURL } from '../../Utils/API';
 import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
-import GIf from '../Gif/GIf';
+import Gif from '../Gif/GIf';
 import Loading from '../Loading/Loading';
 
 
@@ -56,11 +56,11 @@ const FeaturedGifs = () => {
 
                                 if(featuredGifs.length === index + 1 ) {
 
-                                    return <GIf ref={Giff} key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/> 
+                                    return <Gif ref={Giff} key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/> 
                         
                                 } else {
                         
-                                    return  <GIf key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/>    
+                                    return  <Gif key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/>    
                                 }
                                         
                             })
