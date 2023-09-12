@@ -5,9 +5,9 @@ ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor
 
 ## Available Components
 
-[`Carousel`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Carousel) - Used this wrapping component to implement carousel effect for the Trending Gifs.
+[`Carousel`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Carousel) - Used it as a wrapping component to create a carousel effect for the Trending Gifs.
 
-[`FeaturedGifs`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/FeaturedGifs) - Utilised this component to display the top 20 featured Gifs. Implemented scrolling in this component when the scroll reaches the end of the page. New HTTP request is sent to the Tenor server to fetch additional featured gifs. Each HTTP request will fetch 20 gifs which will be shown in the UI. Implmented this functionality learning and using `IntersectionObserver API` in the component. 
+[`FeaturedGifs`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/FeaturedGifs) - Used this component to show the top 20 featured GIFs with infinite scrolling. When the scroll reaches the component's end, it sends a new HTTP request to the Tenor server to load 20 more GIFs into the UI. This was achieved by incorporating the `IntersectionObserver API` into the component.
 
 [`Header`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Header) - Component represents the header section of this application.
 
