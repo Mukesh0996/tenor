@@ -6,7 +6,9 @@ ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor
 ## Available Components
 
 [Carousel](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Carousel) - Used this wrapping component to implement carousel effect for the Trending Gifs.
+
 [Header](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Header) - Component represents the header section in this application.
+
 [GIf](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Gif/) - Used to render Gifs' in the entire application. Used this component across multiple components in the app. 
 
 ### `npm start`
