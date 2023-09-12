@@ -29,6 +29,7 @@ const SearchBar = () => {
                             <input type='text' 
                                 className={SearchBarStyles.searchbarInput} 
                                 placeholder='Search for GIFs and stickers' 
+                                name='search_value'
                                 value={`${searchInput.length> 0 ? searchInput : searchKey}`} onChange={(e)=> setSearchInput(e.target.value)}/>
                             <div className={SearchBarStyles.searchIcon}>
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />

@@ -4,6 +4,7 @@
     width: 75%;
     margin: auto;
     margin-top: 1rem;
+    margin-bottom: .5rem;
 }
 
 .featuredGifContainer h3 {
@@ -11,5 +12,10 @@
 }
 
 .featuredGifs {
-    
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    height: 385px;
+    overflow: auto;
+    position: relative;
 }
