@@ -1,0 +1,21 @@
+
+.gifContainer {
+    margin-right: .5rem;
+    display: inline-flex;
+    width: 250px;
+    flex-direction: column;
+}
+
+.gifContainer:hover {
+    cursor: pointer;
+}
+
+.gifContainer img {
+    object-fit: fill;
+}
+
+.gifContainer span {
+    color: black;
+    font-size: 12px;
+    margin-top: .5rem;
+}

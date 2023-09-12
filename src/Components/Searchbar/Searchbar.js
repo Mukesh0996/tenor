@@ -1,48 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBarStyles from './Searchbar.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { tenorURL } from '../../utils/API';
+import { SearchContext } from '../Store/SearchContext';
+import useFetch from '../Hooks/useFetch';
 
 
 const SearchBar = () => {
 
-    const [searchInput, setSearchInput] = useState('');
+    const { searchKey, setSearchResults } = useContext(SearchContext);
+    const [searchInput, setSearchInput] = useState("");
+    const { isLoading, sendRequest } = useFetch(tenorURL.concat(searchInput)); 
 
 
-    const fetchGifs = async() => {
-
-        let url = tenorURL.concat(searchInput);
-        const result = await fetch(url, {
-            method:"GET"
-        });
-        const res = await result.json();
-       return res;
-    }
-
-    const onSubmitHandler = (e) => {
+    const fetchGifs =  async (e) => {
         e.preventDefault();
-       console.log(fetchGifs());
+       const res = await sendRequest();
+       setSearchResults(res.results);
     }
+
 
     return <div className={SearchBarStyles.searchDiv}>
                 <div className={SearchBarStyles.container}>
                     <h6 className={SearchBarStyles.searchDivHeading}>tenor</h6>
-                    <form onSubmit={onSubmitHandler}>
-                    <div className={SearchBarStyles.searchContainer}>
-                        <input type='text' 
-                            className={SearchBarStyles.searchbarInput} 
-                            placeholder='Search for GIFs and stickers' 
-                            value={searchInput} onChange={(e)=> setSearchInput(e.target.value)}/>
-                        <div className={SearchBarStyles.searchIcon}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </div>
+                    <form onSubmit={fetchGifs}>
+                        <div className={SearchBarStyles.searchContainer}>
+                            <input type='text' 
+                                className={SearchBarStyles.searchbarInput} 
+                                placeholder='Search for GIFs and stickers' 
+                                value={`${searchInput.length> 0 ? searchInput : searchKey}`} onChange={(e)=> setSearchInput(e.target.value)}/>
+                            <div className={SearchBarStyles.searchIcon}>
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-
 }
-
 
 export default SearchBar;

@@ -1,0 +1,50 @@
+.carouselContainer {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.carouselDiv {
+    width: 92%;
+    margin: auto;
+    overflow: hidden;
+  
+}
+
+.carousel {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 0px;
+    transition: all 0.5s ease;
+    z-index: 10;
+}
+
+
+.carouselCtrl {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #94a3b8;
+    border-radius: 5px;
+    color: #1e293b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #d1d5db;
+}
+
+.carouselCtrl:hover {
+    cursor: pointer;
+}
+
+.left {
+    left: 2px;
+    top: 100px;
+}
+
+ .right {
+    right: 2px;
+    top: 100px;
+} 
