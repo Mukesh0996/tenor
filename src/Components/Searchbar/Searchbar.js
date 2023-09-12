@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchBarStyles from './Searchbar.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useRef, useState } from 'react';
-import { tenorURL } from '../../utils/API';
-import { SearchContext } from '../Store/SearchContext';
-import useFetch from '../Hooks/useFetch';
+import { useContext, useState } from 'react';
+import { tenorURL } from '../../Utils/API';
+import useFetch from '../../Hooks/useFetch';
+import { SearchContext } from '../../Store/SearchContext';
+import Loading from '../Loading/Loading';
+
 
 
 const SearchBar = () => {
@@ -22,6 +24,7 @@ const SearchBar = () => {
 
 
     return <div className={SearchBarStyles.searchDiv}>
+                {isLoading && <Loading/>}
                 <div className={SearchBarStyles.container}>
                     <h6 className={SearchBarStyles.searchDivHeading}>tenor</h6>
                     <form onSubmit={fetchGifs}>

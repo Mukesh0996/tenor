@@ -18,4 +18,5 @@
     height: 385px;
     overflow: auto;
     position: relative;
+    margin-top: .5rem;
 }

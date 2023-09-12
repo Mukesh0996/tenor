@@ -1,0 +1,24 @@
+
+.load {
+    position: fixed;
+    top: 0;
+    height: 5px;
+    width: 100%;
+}
+
+.loader {
+    background-color: #b91c1c;
+    width: 0%;
+    height: 100%;
+    animation: expand 3s ease-out infinite;
+}
+
+@keyframes expand {
+    from {
+        width: 0%;
+    } to {
+        width: 100%;
+    }
+
+    
+}

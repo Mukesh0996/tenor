@@ -19,7 +19,7 @@ const Carousel = (props) => {
 
             if(leftAlign.current !== -4380) {
 
-                leftAlign.current = leftAlign.current - (4380/8);
+                leftAlign.current = leftAlign.current - (4580/8);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
 
             }  

@@ -1,8 +1,10 @@
 import { createRef, useEffect, useState } from 'react';
-import { featuredURL } from '../../utils/API';
-import useFetch from '../Hooks/useFetch';
+import { featuredURL } from '../../Utils/API';
+import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import GIf from '../Gif/GIf';
+import Loading from '../Loading/Loading';
+
 
 const FeaturedGifs = () => {
 
@@ -11,10 +13,14 @@ const FeaturedGifs = () => {
     const [isShown, setIsShown] = useState(false);
 
     let Giff = createRef();
-
-
-
     const {sendRequest, isLoading} = useFetch(featuredURL, useNum);
+
+    const fetchFeaturedGifs = async () => {
+        //sending API request
+        let resp =  await sendRequest();
+        setNum(resp.next)
+        setFeaturedGifs(featuredGifs.concat(resp.results));
+    }
 
     const observer = new IntersectionObserver(entries => {
 
@@ -28,12 +34,6 @@ const FeaturedGifs = () => {
     });
 
 
-    const fetchFeaturedGifs = async () => {
-        //sending API request
-        let resp =  await sendRequest();
-        setNum(resp.next)
-        setFeaturedGifs(featuredGifs.concat(resp.results));
-    }
 
     useEffect(() => {
             fetchFeaturedGifs();
@@ -48,6 +48,7 @@ const FeaturedGifs = () => {
     // setInitialRender(true);
 
     return <div className={FeaturedGifsStyles.featuredGifContainer}>
+            {isLoading && <Loading/>}
                 <h3>Featured Gifs</h3>
                 <div className={FeaturedGifsStyles.featuredGifs}>
                         {

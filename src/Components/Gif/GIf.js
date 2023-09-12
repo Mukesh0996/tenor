@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import GifStyles from './Gif.module.css';
-import { SearchContext } from '../Store/SearchContext';
-import useFetch from '../Hooks/useFetch';
-import { tenorURL } from '../../utils/API';
+import useFetch from '../../Hooks/useFetch';
+import { tenorURL } from '../../Utils/API';
+import { SearchContext } from '../../Store/SearchContext';
+
 
 
 

@@ -1,0 +1,67 @@
+
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,.75);
+    z-index: 22;
+}
+
+.close {
+    padding: 1rem;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: whitesmoke;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: rgb(127, 111, 111);
+}
+
+.close:hover {
+    background-color: aliceblue;
+    color: rgb(70, 62, 62);
+}
+
+
+.gifsContainer {
+    width: 80%;
+    margin: auto;
+    position: fixed;
+    top: 25vh;
+    left: 10%;
+    padding: 1rem;
+    border-radius: 10px;
+    z-index: 40;
+    animation: drop 1s ease-out forwards;
+    background: white;
+}
+
+.gifsContainer :is(h3, hr) {
+    margin-bottom: .5rem;
+}
+
+.gifsHolder {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    height: 250px;
+    overflow: auto;
+    gap: .2rem;
+}
+
+
+@keyframes drop {
+    from {
+        transform: translateY(-3rem);
+    } to {
+        transform: translateY(0rem);
+    }
+    
+}
