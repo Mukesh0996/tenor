@@ -1,8 +1,9 @@
 # Tenor Clone App - ReactJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor APIs](https://tenor.com/gifapi/documentation#quickstart)
+
+## Available Components
 
 In the project directory, you can run:
 
