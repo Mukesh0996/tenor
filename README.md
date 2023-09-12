@@ -26,8 +26,10 @@ ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor
 
 ### `Available Custom Hooks`
 
+[`useFetch`]() - This Custom Hook us used to make HTTP requests to the Tenor server and returns the response to the respextive component. This hook takes the first argument as the API URL. This hook is responsible for maintaining the app wide loading state.
 
 
+---
 ### `npm start`
 
 Runs the app in the development mode.\
