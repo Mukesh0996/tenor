@@ -13,6 +13,8 @@ ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor
 
 [`Gif`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Gif/) - Used to render Gifs' in the entire application. Used this component across multiple components in the app. 
 
+[`Searchbar`](https://github.com/Mukesh0996/tenor/tree/main/src/Components/Searchbar) - Represents the searchbar of the app, where user can key-in characters to search the Gifs.
+
 ### `npm start`
 
 Runs the app in the development mode.\
