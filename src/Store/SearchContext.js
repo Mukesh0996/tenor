@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-export const SearchContext = React.createContext({searchInp:"", searchResults:[], setSearchResults: () => {}});
-
-
+export const SearchContext = React.createContext({ 
+                                                    searchKey:"", 
+                                                    searchResults:[], 
+                                                    setSearchResults: () => {}
+                                                });
 
 const SearchContextProvider = (props) => {
 
@@ -10,7 +12,9 @@ const SearchContextProvider = (props) => {
     const [searchResults, setSearchResults] = useState([]);
 
 
-    return <SearchContext.Provider value={{searchKey, setSearchKey, searchResults, setSearchResults}}>{props.children}</SearchContext.Provider>
+    return <SearchContext.Provider value={{searchKey, setSearchKey, searchResults, setSearchResults}}>
+                { props.children }
+            </SearchContext.Provider>
 }
 
 

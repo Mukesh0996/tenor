@@ -6,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { SearchContext } from '../../Store/SearchContext';
 
-
-
 const SearchResults = ({gifs}) => {
 
     const {setSearchResults} = useContext(SearchContext);
@@ -28,7 +26,7 @@ const SearchResults = ({gifs}) => {
         return <div className={SearchResultsStyles.gifsContainer}>
                 <h3>Search Results:</h3>
                 <hr/>
-                <div className={SearchResultsStyles.gifsHolder}>
+                <div className={SearchResultsStyles.gifsHolder} >
                     {
                         gifs.map((gif, index) => <Gif key={index} gifUrl={gif.media[0].gif.url} desc={gif.content_description} />)
                     }
@@ -40,9 +38,9 @@ const SearchResults = ({gifs}) => {
 
 
     return <React.Fragment>
-            { ReactDOM.createPortal(<BackDrop/>, document.getElementById('searchResults')) }
-            { ReactDOM.createPortal(<SearchContainer/>, document.getElementById('searchResults'))}
-    </React.Fragment>
+                { ReactDOM.createPortal(<BackDrop/>, document.getElementById('searchResults')) }
+                { ReactDOM.createPortal(<SearchContainer/>, document.getElementById('searchResults'))}
+            </React.Fragment>
 
 }
 
