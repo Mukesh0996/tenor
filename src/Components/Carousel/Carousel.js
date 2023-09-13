@@ -17,9 +17,9 @@ const Carousel = (props) => {
 
         if(direction === 'left') {
 
-            if(leftAlign.current !== -4380) {
+            if(leftAlign.current !== -2460) {
 
-                leftAlign.current = leftAlign.current - (4580/8);
+                leftAlign.current = leftAlign.current - (2460/8);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
 
             }  
@@ -27,7 +27,7 @@ const Carousel = (props) => {
 
             if(leftAlign.current !== 0) {
 
-                leftAlign.current = leftAlign.current + (4380/8);
+                leftAlign.current = leftAlign.current + (2460/8);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
 
             }

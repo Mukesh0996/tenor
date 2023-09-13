@@ -49,3 +49,10 @@
 .createBtn:hover, .signInBtn:hover {
     transform: translateY(-3px);
 }
+
+@media (max-width: 40rem) {
+    .navbar {
+        width: 90%;
+    }
+    
+}

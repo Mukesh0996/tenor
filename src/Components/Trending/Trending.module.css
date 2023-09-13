@@ -8,3 +8,11 @@
     color: black;
 }
 
+
+
+@media (max-width: 40rem) {
+    .trendingContainer {
+        width: 90%;
+    }
+    
+}

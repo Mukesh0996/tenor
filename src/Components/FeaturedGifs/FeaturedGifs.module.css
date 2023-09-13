@@ -20,3 +20,12 @@
     position: relative;
     margin-top: .5rem;
 }
+
+@media (max-width: 40rem) {
+    .featuredGifContainer {
+        width: 90%;
+    }
+    .featuredGifs {
+        justify-content: center;
+    }
+}
