@@ -27,7 +27,7 @@ const FeaturedGifs = () => {
         let intersecting =  entries[0].isIntersecting;
         setIsShown(intersecting);
 
-        if(isShown) {
+        if(isShown && !isLoading) {
             fetchFeaturedGifs();
         }
 
