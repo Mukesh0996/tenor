@@ -1,7 +1,7 @@
-# Tenor Clone App - ReactJS [Live APP](https://mukesh0996.github.io/tenor/)
+# Tenor Clone App - ReactJS 
 
 
-ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor APIs](https://tenor.com/gifapi/documentation#quickstart)
+ReactJS app built by using [Tenor](https://tenor.com/en-GB/) and by using [Tenor APIs](https://tenor.com/gifapi/documentation#quickstart)  [Live APP](https://mukesh0996.github.io/tenor/)
 
 ## Available Components
 
