@@ -1,5 +1,4 @@
 import React, { createRef, useEffect, useState } from 'react';
-import { featuredURL } from '../../Utils/API';
 import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import Gif from '../Gif/GIf';
@@ -13,7 +12,7 @@ const FeaturedGifs = () => {
     const [isShown, setIsShown] = useState(false);
 
     let Giff = createRef();
-    const {sendRequest, isLoading} = useFetch(featuredURL, num);     //append num to the url such that pos=num
+    const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, num);   //append num to the url such that pos=num
 
     const fetchFeaturedGifs = async () => {
 
@@ -23,7 +22,6 @@ const FeaturedGifs = () => {
     }
 
     const observer = new IntersectionObserver(entries => {
-
         let intersecting =  entries[0].isIntersecting;
         setIsShown(intersecting);
 
@@ -39,15 +37,25 @@ const FeaturedGifs = () => {
 
     useEffect (() => {
             if(Giff.current !== null) {
-            observer.observe(Giff?.current);
+
+            observer.observe(Giff.current);
+
             }
+
+            return () => observer.disconnect();
     }, [Giff])
+
+
+    const scrollHandler = (e) => {
+        e.preventDefault();
+
+    }
 
     return <React.Fragment>
                 { isLoading && <Loading/>}
                 <div className={FeaturedGifsStyles.featuredGifContainer}>
                     <h3>Featured Gifs</h3>
-                    <div className={FeaturedGifsStyles.featuredGifs}>
+                    <div className={FeaturedGifsStyles.featuredGifs} onScroll={scrollHandler}>
                         {
                             featuredGifs.map((gif, index) => {
 

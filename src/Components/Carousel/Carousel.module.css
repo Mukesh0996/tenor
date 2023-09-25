@@ -49,3 +49,10 @@
     right: 2px;
     top: 78px;
 } 
+
+.disabled {
+    pointer-events: none;
+    background: #dde5f1;
+    opacity: 0.5;
+
+}

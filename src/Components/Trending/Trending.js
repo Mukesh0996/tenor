@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import TrendingStyles from './Trending.module.css';
-import { trendingURL } from '../../Utils/API';
 import Gif from '../Gif/GIf';
 import Carousel from '../Carousel/Carousel';
 import useFetch from '../../Hooks/useFetch';
 import Loading from '../Loading/Loading';
 
+console.log(process.env)
 
 const Trending = () => {
 
     const [trendingGifs, setTrendingGifs] = useState([]);
 
-
-    const {sendRequest, isLoading} = useFetch(trendingURL)
+    const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_trending_url)
   
     const fetchTrending = async () => {
 

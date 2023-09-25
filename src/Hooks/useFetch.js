@@ -32,7 +32,7 @@ const useFetch = (url, queryParams = null) => {
             return responseData;
 
         } catch(error) {
-            console.log(error);
+            console.log(error.message);
         }
     }
 

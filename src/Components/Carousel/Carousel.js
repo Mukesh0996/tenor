@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CarouselStyles from './Carousel.module.css';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,37 +6,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Carousel = (props) => {
 
-
     const leftRef = useRef();
     const rightRef = useRef();
+
     const carouselRef = useRef();
     let leftAlign = useRef(0);
 
+    const [restrictLeftMove, setRestrictLeftMove] = useState(false);
+    const [restrictRightMove, setRestrictRightMove] = useState(false);
+
+
+    useEffect(() =>{
+        setRestrictRightMove(true);
+    },[])
 
     const handlerCarouselMovement = (direction) => {
 
         if(direction === 'left') {
 
-            if(leftAlign.current !== -2460) {
+            if(leftAlign.current !== -2451) {
 
-                leftAlign.current = leftAlign.current - (2460/8);
+                leftAlign.current = leftAlign.current - (2451/8);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
 
-            }  
+            } else if(leftAlign.current === -2451) {  
+                setRestrictLeftMove(true);      
+                setRestrictRightMove(false);  
+            }
+
         } else {
 
             if(leftAlign.current !== 0) {
 
-                leftAlign.current = leftAlign.current + (2460/8);
+                leftAlign.current = leftAlign.current + (2451/8);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
 
-            }
-          
+            } else if( leftAlign.current === 0 || leftAlign.current === 0 ) {
+                setRestrictRightMove(true);
+                setRestrictLeftMove(false);
+            } 
         }
     };
 
     return <div className={CarouselStyles.carouselContainer}>
-                    <div className={`${CarouselStyles.carouselCtrl} ${CarouselStyles.left}`} onClick={()=> handlerCarouselMovement('right')} ref={leftRef}>
+                    <div className={`${CarouselStyles.carouselCtrl} ${CarouselStyles.left} ${restrictRightMove && CarouselStyles.disabled}`} onClick={()=> handlerCarouselMovement('right')} ref={leftRef}>
                         <FontAwesomeIcon icon={faCaretLeft} />
                     </div>    
                     <div className={CarouselStyles.carouselDiv}>
@@ -46,7 +59,7 @@ const Carousel = (props) => {
                         }
                         </div>
                     </div>
-                    <div className={`${CarouselStyles.carouselCtrl} ${CarouselStyles.right}`}  onClick={()=> handlerCarouselMovement('left')} ref={rightRef}>
+                    <div className={`${CarouselStyles.carouselCtrl} ${CarouselStyles.right} ${restrictLeftMove && CarouselStyles.disabled}`}  onClick={()=> handlerCarouselMovement('left')} ref={rightRef}>
                         <FontAwesomeIcon icon={faCaretRight} />
                     </div>    
                 </div>

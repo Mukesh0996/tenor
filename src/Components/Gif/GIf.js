@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import GifStyles from './Gif.module.css';
 import useFetch from '../../Hooks/useFetch';
-import { tenorURL } from '../../Utils/API';
+import { tenorURL } from '../../Utils/API.js';
 import { SearchContext } from '../../Store/SearchContext';
 import Loading from '../Loading/Loading';
 
