@@ -40,7 +40,7 @@ const SearchBar = () => {
 
         // fetch gifs only if the pressed key is 'Enter'
         if(e.key === 'Enter' && searchKey.length > 0) fetchGifs();
-        
+
     }
 
     // fires when the mouse is clicked
@@ -60,6 +60,8 @@ const SearchBar = () => {
     const tapSearchkey = (searchKey) => {
         setSearchKey(searchKey);
         fetchGifs();
+        // reset search key and search suggestions
+        setSearchKey("");
         setSearchSuggestions([]);
     }
 
