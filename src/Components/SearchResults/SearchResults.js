@@ -9,7 +9,7 @@ import { SearchContext } from '../../Store/SearchContext';
 const SearchResults = ({gifs}) => {
 
     const {setSearchResults} = useContext(SearchContext);
-    
+    console.log(gifs);
 
     const BackDrop = () => {
 

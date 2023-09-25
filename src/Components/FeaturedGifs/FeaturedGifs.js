@@ -3,6 +3,7 @@ import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import Gif from '../Gif/GIf';
 import Loading from '../Loading/Loading';
+// import useDebouncer from '../../Hooks/useDebouncer';
 
 
 const FeaturedGifs = () => {
@@ -10,13 +11,15 @@ const FeaturedGifs = () => {
     const [num, setNum] = useState("");
     const [featuredGifs, setFeaturedGifs] = useState([]);
     const [isShown, setIsShown] = useState(false);
-
     let Giff = createRef();
+
     const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, num);   //append num to the url such that pos=num
+    // const acc = await useDebouncer(sendRequest);
+    // console.log("from useDebouncer: ", acc);
 
     const fetchFeaturedGifs = async () => {
 
-        let resp =  await sendRequest();         //send API request
+        let resp =  await sendRequest(); //send API request
         setNum(resp.next)
         setFeaturedGifs(featuredGifs.concat(resp.results));
     }
@@ -25,7 +28,8 @@ const FeaturedGifs = () => {
         let intersecting =  entries[0].isIntersecting;
         setIsShown(intersecting);
 
-        if(isShown && !isLoading) {
+        if( isShown ) {
+            console.log('executing');
             fetchFeaturedGifs();
         }
 
@@ -45,10 +49,8 @@ const FeaturedGifs = () => {
             return () => observer.disconnect();
     }, [Giff])
 
-
     const scrollHandler = (e) => {
         e.preventDefault();
-
     }
 
     return <React.Fragment>
@@ -73,7 +75,6 @@ const FeaturedGifs = () => {
                     </div>
                 </div>
             </React.Fragment>
-
 }
 
 export default FeaturedGifs;

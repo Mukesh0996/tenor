@@ -16,6 +16,7 @@
 
 .container {
     width: 75%;
+    position: relative;
 }
 
 .searchDivHeading {
@@ -29,11 +30,12 @@
 }
 
 .searchbarInput {
-    width: 95.6%;
+    width: 100%;
     padding: 0.6rem 1rem;
     outline: none;
     font: inherit;
     border: none;
+    border-radius: 5px;
 }
 
 .searchbarInput::placeholder {
@@ -47,10 +49,41 @@
 }
 
 .searchContainer {
-    position: relative;
-    overflow: hidden;
     border-radius: 5px;
     border: 1px solid grey;
+}
+
+.searchSuggestions {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top:47px;
+    bottom: 10px; 
+}
+
+.searchSuggestions ul {
+    list-style: none;
+    background: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px 0 10px 0;
+}
+
+.searchSuggestions ul li {
+ 
+   padding: 10px;
+   text-transform: capitalize;
+   cursor: pointer;
+   color: black;
+}
+
+.searchSuggestions ul li:not(:last-child) {
+    margin-bottom: .35rem;
+}
+
+.searchSuggestions ul li:hover {
+    background-color: #e2e8f0;
+
 }
 
 .searchIcon {
@@ -58,15 +91,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.65rem;
+    height: 2.47rem;
     width: 3.1rem;
-    top: -1.9px;
-    right: -1px;
+    top: 1px;
+    right: 0px;
     color: black;
     font-size: 20px;
     cursor: pointer;
     border-left: 1px solid grey;
     background: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    z-index: 2;
 }
 
 .searchIcon:focus {

@@ -5,11 +5,13 @@ import Carousel from '../Carousel/Carousel';
 import useFetch from '../../Hooks/useFetch';
 import Loading from '../Loading/Loading';
 
+
 const Trending = () => {
 
     const [trendingGifs, setTrendingGifs] = useState([]);
 
     const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_trending_url)
+    // console.log(sendRequest());
   
     const fetchTrending = async () => {
 
