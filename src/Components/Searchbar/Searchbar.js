@@ -39,18 +39,17 @@ const SearchBar = () => {
         e.preventDefault();
 
         // fetch gifs only if the pressed key is 'Enter'
-        if(e.key === 'Enter') {
-            fetchGifs();
-       };
+        if(e.key === 'Enter' && searchKey.length > 0) fetchGifs();
+        
     }
 
     // fires when the mouse is clicked
     const mouseUpHandler = (e) => {
 
         e.preventDefault();
-        fetchGifs();
+        if(searchKey.length > 0 )  fetchGifs();
+       
     }
-
 
     // function to get suggestions from tenor server
     const getSearchSuggestions = async ()=> {

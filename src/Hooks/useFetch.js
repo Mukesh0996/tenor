@@ -21,7 +21,6 @@ const useFetch = (url, queryParams = null) => {
             });
 
             let responseData = await response.json();
-            console.log(responseData);
             setTimeout(() => {
                 setIsLoading(false);
             },3000)

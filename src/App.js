@@ -11,7 +11,6 @@ function App() {
 
   const { searchResults } = useContext(SearchContext);
   
-console.log(searchResults);
 
   return (
     <div className="App">

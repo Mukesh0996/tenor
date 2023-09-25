@@ -3,7 +3,6 @@ import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import Gif from '../Gif/GIf';
 import Loading from '../Loading/Loading';
-// import useDebouncer from '../../Hooks/useDebouncer';
 
 
 const FeaturedGifs = () => {
@@ -14,8 +13,6 @@ const FeaturedGifs = () => {
     let Giff = createRef();
 
     const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, num);   //append num to the url such that pos=num
-    // const acc = await useDebouncer(sendRequest);
-    // console.log("from useDebouncer: ", acc);
 
     const fetchFeaturedGifs = async () => {
 
@@ -29,7 +26,6 @@ const FeaturedGifs = () => {
         setIsShown(intersecting);
 
         if( isShown ) {
-            console.log('executing');
             fetchFeaturedGifs();
         }
 
@@ -40,14 +36,25 @@ const FeaturedGifs = () => {
     },[]);
 
     useEffect (() => {
+
             if(Giff.current !== null) {
-
             observer.observe(Giff.current);
-
             }
 
             return () => observer.disconnect();
     }, [Giff])
+
+    function throttle(func, limit) {
+        let inThrottle;
+        return function () {
+         const context = this,
+          args = arguments;
+         if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+         }
+        };}
 
     const scrollHandler = (e) => {
         e.preventDefault();
