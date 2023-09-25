@@ -5,8 +5,6 @@ import Carousel from '../Carousel/Carousel';
 import useFetch from '../../Hooks/useFetch';
 import Loading from '../Loading/Loading';
 
-console.log(process.env)
-
 const Trending = () => {
 
     const [trendingGifs, setTrendingGifs] = useState([]);
