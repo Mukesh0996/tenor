@@ -18,3 +18,46 @@
     transform: scale(1.01);
     box-shadow: 0 0 10px 0 rgba(0,0, 0,0.8);
 }
+
+.url {
+    width: 70%;
+    margin: auto;
+    margin-top: 2rem;
+    color: black;
+}
+
+.urlContainer {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+    cursor: pointer;
+    font-weight: lighter;
+    position: relative;
+}
+
+.status {
+    position: absolute;
+    top: -55px;
+    right: 10px;
+    background-color: black;
+    color: white;
+    padding: .5rem;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.status::before {
+    content: " ";
+    position: absolute;
+    top: 29px;
+    right: 10px;
+    border: 5px solid black;
+    background-color: black;
+    transform: rotateZ(45deg);
+}
+
+.urlContainer:hover {
+
+    border: 1px dashed #ccc ;
+}
