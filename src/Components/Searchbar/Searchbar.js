@@ -76,7 +76,6 @@ const SearchBar = () => {
         setSearchKey(searchKey);
 
         fetchGifs();
-        setSearchKey('');
         // reset search key and search suggestions
         setSearchSuggestions([]);
     }
