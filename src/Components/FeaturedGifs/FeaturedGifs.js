@@ -3,13 +3,13 @@ import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import Gif from '../Gif/GIf';
 import Loading from '../Loading/Loading';
+import useObserver from '../../Hooks/useObserver';
 
 
 const FeaturedGifs = () => {
 
     const [num, setNum] = useState("");
     const [featuredGifs, setFeaturedGifs] = useState([]);
-    const [isShown, setIsShown] = useState(false);
     let Giff = createRef();
 
     const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, num);   //append num to the url such that pos=num
@@ -17,44 +17,27 @@ const FeaturedGifs = () => {
     const fetchFeaturedGifs = async () => {
 
         let resp =  await sendRequest(); //send API request
-        setNum(resp.next)
+        setNum(resp.next)// store num to fetch the next set of featured gifs for the next API call
         setFeaturedGifs(featuredGifs.concat(resp.results));
     }
 
-    const observer = new IntersectionObserver(entries => {
-        let intersecting =  entries[0].isIntersecting;
-        setIsShown(intersecting);
-
-        if( isShown ) {
-            fetchFeaturedGifs();
-        }
-
-    });
+    const { observer } = useObserver(fetchFeaturedGifs, isLoading);
 
     useEffect(() => {
             fetchFeaturedGifs();
     },[]);
 
+
     useEffect (() => {
 
             if(Giff.current !== null) {
+                
             observer.observe(Giff.current);
+
             }
 
             return () => observer.disconnect();
     }, [Giff])
-
-    function throttle(func, limit) {
-        let inThrottle;
-        return function () {
-         const context = this,
-          args = arguments;
-         if (!inThrottle) {
-          func.apply(context, args);
-          inThrottle = true;
-          setTimeout(() => (inThrottle = false), limit);
-         }
-        };}
 
     const scrollHandler = (e) => {
         e.preventDefault();

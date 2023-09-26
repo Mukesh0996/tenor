@@ -1,25 +1,25 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
-import FeaturedGifs from './Components/FeaturedGifs/FeaturedGifs';
 import Header from './Components/Header/Header';
 import SearchBar from './Components/Searchbar/Searchbar';
-import Trending from './Components/Trending/Trending';
 import { SearchContext } from './Store/SearchContext';
-import SearchResults from './Components/SearchResults/SearchResults';
+import SearchResult from './Components/SearchResults/SearchResults';
+import {  Route, Routes } from 'react-router-dom';
+import Container from './Components/Container';
+
 
 function App() {
 
   const { searchResults } = useContext(SearchContext);
   
-
   return (
     <div className="App">
         <Header/>
         <SearchBar/>
-        <Trending/>
-        <FeaturedGifs/>
-        { (searchResults.length > 0 )  && <SearchResults gifs={searchResults}/>  }
-
+        <Routes>
+            <Route path='/tenor' Component={Container}/>
+            <Route path='/search-results' element={<SearchResult gifs={searchResults}/>}/>
+        </Routes>
     </div>
   );
 }

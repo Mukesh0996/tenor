@@ -5,8 +5,6 @@ import { SearchContext } from '../../Store/SearchContext';
 import Loading from '../Loading/Loading';
 
 
-
-
 const Gif = React.forwardRef((props, ref) => {
     
     const {setSearchKey , setSearchResults} = useContext(SearchContext);
@@ -25,7 +23,7 @@ const Gif = React.forwardRef((props, ref) => {
 
     return <React.Fragment>
                 { isLoading && <Loading/>}
-                <div ref={ref} className={GifStyles.gifContainer} onClick={onClickHandler}>
+                <div ref={ref} className={`${GifStyles.gifContainer} ${props.class}`} onClick={onClickHandler}>
                     <img src={props.gifUrl} width="150" height="150" alt="breakup"/>
                     <span>{props.desc}</span>
                 </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useFetch = (url, queryParams = null) => {
+const useFetch = (url, num = null) => {
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -9,11 +9,11 @@ const useFetch = (url, queryParams = null) => {
 
             setIsLoading(true);
 
-            if(queryParams !== null) {
-                
+            if(num !== null) {
                //to remove the previous appended pos query params before initiating the network call.
                let updatedURL = url.split("&pos")[0];
-               url = updatedURL.concat(`&pos=${queryParams}`)
+               url = updatedURL.concat(`&pos=${num}`);
+               
             }
 
             let response = await fetch(url, {
@@ -22,8 +22,10 @@ const useFetch = (url, queryParams = null) => {
 
             let responseData = await response.json();
             setTimeout(() => {
+
                 setIsLoading(false);
-            },3000)
+
+            },1500);
            
             return responseData;
 
@@ -31,17 +33,6 @@ const useFetch = (url, queryParams = null) => {
             console.log(error.message);
         }
     }
-
-    // function debhouncer(delay = 1000) {
-
-    //     let timer;
-    //     clearTimeout(timer);
-
-    //     timer = setTimeout()
-
-
-
-    // }
 
     return {
         isLoading,

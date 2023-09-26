@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import headerStyle from  './Header.module.css'
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
     return <header className={headerStyle.header}>
                 <nav className={headerStyle.navbar}>
                     <h6 className={headerStyle.heading}> 
-                        <a href='/'>tenor</a>
+                        <Link to='/tenor'>tenor</Link>
                     </h6>
                 </nav>
 

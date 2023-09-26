@@ -5,27 +5,31 @@ import React, { useContext, useEffect, useState } from 'react';
 import useFetch from '../../Hooks/useFetch';
 import { SearchContext } from '../../Store/SearchContext';
 import Loading from '../Loading/Loading';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const SearchBar = () => {
 
-    const { searchKey, setSearchResults, setSearchKey} = useContext(SearchContext);
+    const { searchKey, setSearchResults, setSearchKey, searchResults , setSearchNum} = useContext(SearchContext);
     const [searchSuggestions, setSearchSuggestions] = useState([]);
 
-    const { isLoading, 
-        sendRequest } = useFetch(process.env.react_app_tenor_url.concat(searchKey)); 
-    const {isLoading: searchLoading, 
-        sendRequest: fetchSearchSuggestions } = useFetch(process.env.react_app_tenor_search_suggestions_url.concat(searchKey));
+    const { isLoading, sendRequest } = useFetch(process.env.react_app_tenor_url.concat(searchKey)); 
+    const {isLoading: searchLoading, sendRequest: fetchSearchSuggestions } = useFetch(process.env.react_app_tenor_search_suggestions_url.concat(searchKey));
+
+    const navigate = useNavigate();
 
     // function to fetch gifs from server using useFetch custom hook
     const fetchGifs = async (e) => {
-
+        console.log('executing');
         if(e !== undefined) {
             e.preventDefault();
         }
 
        const response = await sendRequest();
-       setSearchResults(response.results);
+       setSearchNum(response.next);
+       navigate('/search-results');
+       setSearchResults(searchResults.concat(response.results));
     }
 
     // fires when we change the value in the field to set the searchKey
@@ -39,7 +43,15 @@ const SearchBar = () => {
         e.preventDefault();
 
         // fetch gifs only if the pressed key is 'Enter'
-        if(e.key === 'Enter' && searchKey.length > 0) fetchGifs();
+        if(e.key === 'Enter'){ 
+            fetchGifs();
+            setSearchSuggestions([]);
+
+            if(searchResults.length > 0) {
+
+                setSearchKey("");
+            }
+        }
 
     }
 
@@ -52,20 +64,24 @@ const SearchBar = () => {
     }
 
     // function to get suggestions from tenor server
-    const getSearchSuggestions = async ()=> {
+    const getSearchSuggestions = async () => {
+
        let data = await fetchSearchSuggestions();
        setSearchSuggestions(data.results);
+
     }
 
     const tapSearchkey = (searchKey) => {
+
         setSearchKey(searchKey);
+
         fetchGifs();
+        setSearchKey('');
         // reset search key and search suggestions
-        setSearchKey("");
         setSearchSuggestions([]);
     }
 
-    //debouncing by creating a delay of 1s
+    //debouncing by creating a delay of .5s
     useEffect( () => {
         let timer;
 
@@ -91,13 +107,15 @@ const SearchBar = () => {
                                     placeholder='Search for GIFs and stickers' 
                                     name='search_value'
                                     value={searchKey} 
-                                    onChange={onChangeHandler}/>
+                                    onChange={onChangeHandler} 
+                                    onKeyUp={(e) => setSearchSuggestions([])}
+                                />
                                 <div className={SearchBarStyles.searchIcon} tabIndex={0} onMouseUp={mouseUpHandler} onKeyUp={keyUpHandler}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                 </div>
                             </div>
                         </form>
-                        { searchSuggestions.length > 0 && <div className={SearchBarStyles.searchSuggestions}>
+                        { (searchSuggestions.length > 0) && <div className={SearchBarStyles.searchSuggestions}>
                             <ul>
                                 {
                                     searchSuggestions.map((searchsuggestion, index)=> {
