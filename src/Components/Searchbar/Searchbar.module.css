@@ -59,6 +59,8 @@
     left: 0px;
     top:47px;
     bottom: 10px; 
+    animation: drop 1s ease-in .5s forwards;
+    transform: scale(0);
 }
 
 .searchSuggestions ul {
@@ -112,6 +114,13 @@
 @media (max-width: 40rem) {
     .container {
         width: 90%;
+    }
+    
+}
+
+@keyframes drop {
+    to {
+        transform: scale(1);
     }
     
 }

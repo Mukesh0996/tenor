@@ -109,6 +109,7 @@ const SearchBar = () => {
                                     value={searchKey} 
                                     onChange={onChangeHandler} 
                                     onKeyUp={(e) => setSearchSuggestions([])}
+                                    aut
                                 />
                                 <div className={SearchBarStyles.searchIcon} tabIndex={0} onMouseUp={mouseUpHandler} onKeyUp={keyUpHandler}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
