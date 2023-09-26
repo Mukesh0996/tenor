@@ -3,7 +3,6 @@ import CarouselStyles from './Carousel.module.css';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 const Carousel = (props) => {
 
     const leftRef = useRef();
@@ -16,20 +15,20 @@ const Carousel = (props) => {
     const [restrictRightMove, setRestrictRightMove] = useState(false);
 
 
-    useEffect(() =>{
+    useEffect(() => {
         setRestrictRightMove(true);
     },[])
 
     const handlerCarouselMovement = (direction) => {
 
         if(direction === 'left') {
+            if(leftAlign.current !== -3656) {
 
-            if(leftAlign.current !== -2451) {
-
-                leftAlign.current = leftAlign.current - (2451/8);
+                leftAlign.current = leftAlign.current - (3656/4);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
+                setRestrictRightMove(false);
 
-            } else if(leftAlign.current === -2451) {  
+            } else if(leftAlign.current <= -3656) {  
                 setRestrictLeftMove(true);      
                 setRestrictRightMove(false);  
             }
@@ -37,11 +36,11 @@ const Carousel = (props) => {
         } else {
 
             if(leftAlign.current !== 0) {
-
-                leftAlign.current = leftAlign.current + (2451/8);
+                leftAlign.current = leftAlign.current + (3656/4);
                 carouselRef.current.style =  `left:${leftAlign.current}px`;
+                setRestrictLeftMove(false);
 
-            } else if( leftAlign.current === 0 || leftAlign.current === 0 ) {
+            } else if( leftAlign.current === 0 ) {
                 setRestrictRightMove(true);
                 setRestrictLeftMove(false);
             } 

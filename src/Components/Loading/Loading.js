@@ -1,14 +1,7 @@
 import LoadingStyles from './Loading.module.css';
 import ReactDOM from 'react-dom';
 
-const Loading = () => {
-
-
-
-
-
-
-    
+const Loading = () => {  
    
     return    ReactDOM.createPortal(<div className={LoadingStyles.load}>
                                         <div className={LoadingStyles.loader}></div>

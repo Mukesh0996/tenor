@@ -1,16 +1,52 @@
 .trendingContainer {
-    width: 75%;
+    width: 90%;
     margin: auto;
     margin-top: 1rem;   
 }
 
 .trendingContainer h3 {
     color: black;
+    margin-bottom: 10px;
 }
 
 
+.t_gif {
+    display: inline-block;
+    margin-top: .5rem;
+    width: 212.5px;
+    position: relative;
+    text-decoration: none;
+    transition: all .5s ease;
+}
 
-@media (max-width: 40rem) {
+.t_gif:hover {
+   transform: translateY(-2px);
+}
+
+.t_gif:not(:first-child) {
+    margin: 0 20px;
+}
+.t_gif b {
+    color: black;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin-top: .25rem;
+}
+
+.preview {
+    background-color: grey;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,.05), 0 2px 4px 0 rgba(0,0,0,.08);
+    height: 90px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+
+
+@media (max-width: 60rem) {
     .trendingContainer {
         width: 90%;
     }

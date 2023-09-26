@@ -6,11 +6,12 @@ import { SearchContext } from './Store/SearchContext';
 import SearchResult from './Components/SearchResults/SearchResults';
 import {  Route, Routes } from 'react-router-dom';
 import Container from './Components/Container';
+import PreviewGif from './Components/PreviewGif/PreviewGif';
 
 
 function App() {
 
-  const { searchResults } = useContext(SearchContext);
+  const { searchResults, previewGif } = useContext(SearchContext);
   
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
         <Routes>
             <Route path='/tenor' Component={Container}/>
             <Route path='/search-results' element={<SearchResult gifs={searchResults}/>}/>
+            <Route path='/preview-gif/:gifId' element={<PreviewGif gif={previewGif}/>}/>
         </Routes>
     </div>
   );

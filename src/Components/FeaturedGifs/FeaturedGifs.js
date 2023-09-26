@@ -31,7 +31,7 @@ const FeaturedGifs = () => {
     useEffect (() => {
 
             if(Giff.current !== null) {
-                
+
             observer.observe(Giff.current);
 
             }

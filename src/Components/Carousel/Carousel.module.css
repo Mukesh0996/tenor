@@ -13,20 +13,19 @@
 
 .carousel {
     margin: auto;
-    display: flex;
-    align-items: center;
     position: relative;
     left: 0px;
     transition: all 0.5s ease;
     z-index: 10;
     gap: 1rem;
+    white-space: nowrap;
 }
 
 
 .carouselCtrl {
     position: absolute;
     width: 25px;
-    height: 25px;
+    height: 100%;
     border: 1px solid #94a3b8;
     border-radius: 5px;
     color: #1e293b;
@@ -41,13 +40,13 @@
 }
 
 .left {
-    left: 2px;
-    top: 78px;
+    left: -9px;
+    /* top: 122px; */
 }
 
  .right {
-    right: 2px;
-    top: 78px;
+    right: -18px;
+    top: 0px;
 } 
 
 .disabled {
@@ -55,4 +54,50 @@
     background: #dde5f1;
     opacity: 0.5;
 
+}
+
+
+@media (max-width: 65) {
+    .left {
+        left: -13px;
+        /* top: 70px; */
+    }
+
+    .right {
+        right: -18px;
+        /* top: 70px; */
+    }
+
+    
+}
+
+@media (max-width: 60rem) {
+
+    .left {
+        left: -13px;
+        /* top: 90px; */
+    }
+
+    .right {
+        right: -18px;
+        /* top: 90px; */
+    }
+
+    
+}
+
+@media (max-width: 30rem) {
+
+    .carousel {
+        overflow: auto;
+    }
+
+    .left {
+       display: none;
+    }
+
+    .right {
+      display: none;
+    }
+    
 }

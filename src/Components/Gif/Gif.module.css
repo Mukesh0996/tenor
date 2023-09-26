@@ -1,13 +1,20 @@
 
 .gifContainer {
-    margin-right: .5rem;
+    text-decoration: none;
+    position: relative;
     display: inline-flex;
     justify-content: space-around;
     flex-direction: column;
+    width: 22%;
+    margin-bottom: .5rem;
+    margin-left: .5rem;
 }
 
 .gifContainer:hover {
     cursor: pointer;
+    transition: all 0.2s ease;
+    transform: scale(1.01);
+    box-shadow: 0 0 10px 0 rgba(0,0, 0,0.8);
 }
 
 .gifContainer img {
@@ -15,7 +22,29 @@
 }
 
 .gifContainer span {
-    color: black;
-    font-size: 12px;
-    margin-top: .5rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: bold;
+    display: none;
+}
+
+.gifContainer:hover span {
+    display: block;
+}
+
+@media (max-width: 60rem) { 
+
+    .gifContainer {
+        width: 30%;
+    }
+}
+
+@media (max-width:30rem) {
+    .gifContainer {
+        width: 100%;
+    }
+    
 }
