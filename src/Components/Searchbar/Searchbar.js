@@ -100,7 +100,7 @@ const SearchBar = () => {
                 <div className={SearchBarStyles.searchDiv}>
                     <div className={SearchBarStyles.container}>
                         <h6 className={SearchBarStyles.searchDivHeading}>tenor</h6>
-                        <form onSubmit={fetchGifs}>
+                        <form onSubmit={fetchGifs} autoComplete='off'>
                             <div className={SearchBarStyles.searchContainer}>
                                 <input type='text' 
                                     className={SearchBarStyles.searchbarInput} 
