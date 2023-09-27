@@ -71,18 +71,19 @@
     
 }
 
-@media (max-width: 60rem) {
+@media (max-width: 50rem) {
+
+    .carousel {
+        overflow: auto;
+    }
 
     .left {
-        left: -13px;
-        /* top: 90px; */
+       display: none;
     }
 
     .right {
-        right: -18px;
-        /* top: 90px; */
+      display: none;
     }
-
     
 }
 
