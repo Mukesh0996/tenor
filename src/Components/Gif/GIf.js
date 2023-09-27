@@ -15,12 +15,13 @@ const Gif = React.forwardRef((props, ref) => {
     }
     let desc = props.desc && props.desc.split(" ").join("-");
 
-    
+        let img = <div className={GifStyles.img} style={{backgroundImage:`url(${props.gifUrl})`}}></div>
 
 
     return <React.Fragment>
                 <Link to={`/preview-gif/${desc}`} ref={ref} className={GifStyles.gifContainer} onClick={onClickHandler}>
-                        <img src={props.gifUrl} alt=""/>                        
+                        {/* <img src={props.gifUrl} alt=""/>                         */}
+                        {img}
                     <span>{props.desc}</span>
                 </Link>
             </React.Fragment>

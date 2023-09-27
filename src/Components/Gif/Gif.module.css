@@ -6,8 +6,9 @@
     justify-content: space-around;
     flex-direction: column;
     width: 22%;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
     margin-left: .5rem;
+    height: 250px;
 }
 
 .gifContainer:hover {
@@ -19,6 +20,15 @@
 
 .gifContainer img {
     object-fit: fill;
+}
+
+.img {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-color: grey;
+    background-repeat: no-repeat;
+    background-position: top;
 }
 
 .gifContainer span {
@@ -38,7 +48,7 @@
 @media (max-width: 60rem) { 
 
     .gifContainer {
-        width: 30%;
+        width: 48%;
     }
 }
 
