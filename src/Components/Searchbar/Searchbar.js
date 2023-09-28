@@ -209,7 +209,7 @@ const SearchBar = () => {
                                     searchSuggestions.suggestions.map((searchsuggestion, index)=> {
                                     return  <li key={index} 
                                                 className={index === searchSuggestions.suggestionIndex ? SearchBarStyles.selected: ''}
-                                                onClick={(e)=> tapSearchkey(searchsuggestion)}>
+                                                onClick={(e)=> {e.preventDefault(); tapSearchkey(searchsuggestion)}}>
                                                 { searchsuggestion }
                                             </li>;
                                     })
