@@ -7,8 +7,8 @@ import Trending from "./Trending/Trending";
 const Container = () => {
 
     return <React.Fragment>
-            <Trending/>
-            <FeaturedGifs/>
+                <Trending/>
+                <FeaturedGifs/>
            </React.Fragment>
 
 

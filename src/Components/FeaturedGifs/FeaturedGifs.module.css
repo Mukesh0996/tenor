@@ -1,7 +1,7 @@
 
 
 .featuredGifContainer {
-    width: 90%;
+    width: 90vw;
     margin: auto;
     margin-bottom: .5rem;
     margin-top: 1rem;
@@ -16,7 +16,7 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    height: 385px;
+    height: 70vh;
     overflow: auto;
     position: relative;
     margin-top: .5rem;
@@ -24,7 +24,7 @@
 
 @media (max-width: 60rem) {
     .featuredGifContainer {
-        width: 90%;
+        width: 90vw;
     }
     .featuredGifs {
         width: 100%;

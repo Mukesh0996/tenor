@@ -1,24 +1,25 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { createRef, useContext, useEffect } from 'react';
 import useFetch from '../../Hooks/useFetch';
 import FeaturedGifsStyles from './FeaturedGifs.module.css';
 import Gif from '../Gif/GIf';
 import Loading from '../Loading/Loading';
 import useObserver from '../../Hooks/useObserver';
+import { AppContext } from '../../Store/SearchContext';
 
 
 const FeaturedGifs = () => {
 
-    const [num, setNum] = useState("");
-    const [featuredGifs, setFeaturedGifs] = useState([]);
+    const {featuredGifs, stateDispatcher, searchNum} = useContext(AppContext)
     let Giff = createRef();
 
-    const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, num);   //append num to the url such that pos=num
+    const {sendRequest, isLoading} = useFetch(process.env.react_app_tenor_feature_url, searchNum);   //append num to the url such that pos=num
 
     const fetchFeaturedGifs = async () => {
 
         let resp =  await sendRequest(); //send API request
-        setNum(resp.next)// store num to fetch the next set of featured gifs for the next API call
-        setFeaturedGifs(featuredGifs.concat(resp.results));
+        stateDispatcher({ type: 'SET_SEARCH_NUM', value: resp.next})// store num to fetch the next set of featured gifs for the next API call
+        stateDispatcher({type:'SET_FEATURED_GIFS', value: resp.results})
+
     }
 
     const { observer } = useObserver(fetchFeaturedGifs, isLoading);
@@ -53,11 +54,11 @@ const FeaturedGifs = () => {
 
                                 if(featuredGifs.length === index + 1 ) {
 
-                                    return <Gif ref={Giff} key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/> 
+                                    return <Gif ref={Giff} key={index} gifUrl={gif.media[0].gif.url}  description={gif.content_description}/> 
                         
                                 } else {
                         
-                                    return  <Gif key={index} gifUrl={gif.media[0].gif.url}  desc={gif.content_description}/>    
+                                    return  <Gif key={index} gifUrl={gif.media[0].gif.url}  description={gif.content_description}/>    
                                 }
                                         
                             })

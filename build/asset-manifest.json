@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tenor/static/css/main.2e4500ba.css",
-    "main.js": "/tenor/static/js/main.6cc34cc4.js",
+    "main.css": "/tenor/static/css/main.f6bd26cf.css",
+    "main.js": "/tenor/static/js/main.2871e7e2.js",
     "static/js/787.7751ccf5.chunk.js": "/tenor/static/js/787.7751ccf5.chunk.js",
     "index.html": "/tenor/index.html",
-    "main.2e4500ba.css.map": "/tenor/static/css/main.2e4500ba.css.map",
-    "main.6cc34cc4.js.map": "/tenor/static/js/main.6cc34cc4.js.map",
+    "main.f6bd26cf.css.map": "/tenor/static/css/main.f6bd26cf.css.map",
+    "main.2871e7e2.js.map": "/tenor/static/js/main.2871e7e2.js.map",
     "787.7751ccf5.chunk.js.map": "/tenor/static/js/787.7751ccf5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e4500ba.css",
-    "static/js/main.6cc34cc4.js"
+    "static/css/main.f6bd26cf.css",
+    "static/js/main.2871e7e2.js"
   ]
 }

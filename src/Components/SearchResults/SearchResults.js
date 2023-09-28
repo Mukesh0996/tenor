@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Gif from '../Gif/GIf';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-import { SearchContext } from '../../Store/SearchContext';
+import { AppContext } from '../../Store/SearchContext';
 import useObserver from '../../Hooks/useObserver';
 import useFetch from '../../Hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ import Loading from '../Loading/Loading';
 
 const SearchResult = ({gifs}) => {
 
-    const {setSearchResults, setSearchKey, searchResults, searchKey} = useContext(SearchContext);
+    const {searchKey, stateDispatcher} = useContext(AppContext);
     const gifRef = createRef();
     const {isLoading, sendRequest} = useFetch(process.env.react_app_tenor_url.concat(searchKey));
 
@@ -21,7 +21,7 @@ const SearchResult = ({gifs}) => {
 
     const fetchAdditionalGifs = async () => {
         const response = await sendRequest();
-        setSearchResults(searchResults.concat(response.results))
+        stateDispatcher({type: 'SET_SEARCH_RESULTS', value: response.results});
     }
 
     const { observer } = useObserver(fetchAdditionalGifs);
@@ -37,10 +37,9 @@ const SearchResult = ({gifs}) => {
 
     const onCloseHandler = () => {
 
-        setSearchKey("");
-        setSearchResults([]);
+        stateDispatcher({type: 'RESET_SEARCH_KEY'});
+        stateDispatcher({type:'RESET_SEARCH_RESULTS'});
         navigate('/tenor');
-
     }
 
     const BackDrop = () => {
@@ -62,12 +61,11 @@ const SearchResult = ({gifs}) => {
                     {
                         gifs.map((gif, index) => {
                             if(gifs.length === index + 1 ) {
-
-                                return  <Gif key={index} gifUrl={gif.media[0].gif.url} desc={gif.content_description} />
+                                return  <Gif ref={gifRef} key={index} gifUrl={gif.media[0].gif.url} description={gif.content_description} />
 
                             } else {
 
-                                return  <Gif key={index} gifUrl={gif.media[0].gif.url} desc={gif.content_description} />
+                                return  <Gif key={index} gifUrl={gif.media[0].gif.url} description={gif.content_description} />
                             }
                         
                         })

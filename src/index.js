@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import SearchContextProvider from './Store/SearchContext';
 import { BrowserRouter } from 'react-router-dom';
+import AppContextProvider from './Store/SearchContext';
 
 
 
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <BrowserRouter>
-    <SearchContextProvider>
+    <AppContextProvider>
       <App/>
-    </SearchContextProvider>
+    </AppContextProvider>
     </BrowserRouter>
 );
 

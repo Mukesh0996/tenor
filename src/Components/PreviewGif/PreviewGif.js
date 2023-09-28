@@ -23,7 +23,7 @@ const PreviewGif = (props) => {
 
     return <React.Fragment>
                 <div className={styles.previewGif}>
-                    <h2>{props.gif.desc}</h2>
+                    <h2>{props.gif.description}</h2>
                     <img src={props.gif.gifUrl} alt={props.gif.desc}/>
                 </div> 
                 <div className={styles.url}>
@@ -36,11 +36,6 @@ const PreviewGif = (props) => {
                     </div>
                 </div>
             </React.Fragment>
-    
-    
-
-
 }
-
 
 export default PreviewGif;

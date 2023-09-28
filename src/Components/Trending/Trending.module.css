@@ -1,5 +1,5 @@
 .trendingContainer {
-    width: 90%;
+    width: 90vw;
     margin: auto;
     margin-top: 1rem;   
 }
@@ -46,7 +46,7 @@
 }
 
 
-@media (max-width: 60rem) {
+@media only screen and (max-width: 60rem) {
     .trendingContainer {
         width: 90%;
     }

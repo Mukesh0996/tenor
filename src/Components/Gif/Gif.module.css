@@ -5,10 +5,11 @@
     display: inline-flex;
     justify-content: space-around;
     flex-direction: column;
-    width: 22%;
-    margin-bottom: 1rem;
+    width: 220px;
+    margin-bottom: .5rem;
     margin-left: .5rem;
     height: 250px;
+    margin-bottom: 2rem;
 }
 
 .gifContainer:hover {
@@ -48,7 +49,7 @@
 @media (max-width: 60rem) { 
 
     .gifContainer {
-        width: 48%;
+        width: 30%;
     }
 }
 

@@ -1,23 +1,82 @@
-import React, { useState } from "react";
-
-export const SearchContext = React.createContext({ 
-                                                    searchKey:"", 
-                                                    setSearchKey: () => {},
-                                                    searchResults:[], 
-                                                    setSearchResults: () => {}
-                                                });
-
-const SearchContextProvider = (props) => {
-
-    const [searchKey, setSearchKey] = useState("");
-    const [searchNum, setSearchNum] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-    const [previewGif, setPreviewGif] = useState({});
+import React, { useReducer } from "react";
 
 
-    return <SearchContext.Provider value={{ searchKey, setSearchKey, searchResults, setSearchResults, searchNum, setSearchNum , previewGif, setPreviewGif}}>
+export const AppContext = React.createContext({ 
+                                                searchKey:"", 
+                                                searchResults: [], 
+                                                searchNum:"",
+                                                previewGif:{},
+                                                featuredGifs:[],
+                                                stateDispatcher: ()=>{}
+                                            });
+    let initialState = {
+        searchKey: "", 
+        searchResults: [], 
+        searchNum: "", 
+        previewGif: {}, 
+        featuredGifs : [], 
+        stateDispatcher:() => {}
+    };
+
+const AppContextProvider = (props) => {
+
+    function reducerFn (state, action) {
+        let type = action.type;
+
+       switch (type) {
+            case 'SET_SEARCH_KEY':
+                    return {
+                        ...state,
+                        searchKey: action.value
+                    };
+            case 'RESET_SEARCH_KEY': 
+                return {
+                    ...state,
+                    searchKey: "",
+                };
+    
+            case 'SET_SEARCH_RESULTS': 
+                return {
+                    ...state,
+                    searchResults : state.searchResults.concat(action.value)
+                }
+            case 'RESET_SEARCH_RESULTS' :
+                return {
+                    ...state,
+                    searchResults : []
+                }
+            case 'SET_FEATURED_GIFS' : 
+                return {
+                    ...state,
+                    featuredGifs: state.featuredGifs.concat(action.value)
+                }
+            case 'SET_SEARCH_NUM': 
+                return {
+                    ...state,
+                    searchNum: action.value
+                }  
+            case 'SET_PREVIEW_GIF': {
+                return {
+                    ...state,
+                    previewGif: action.value
+                }
+            }  
+            default: return initialState;        
+        }
+    }
+
+    const [ appState, stateDispatcher ] = useReducer(reducerFn, initialState);
+
+    return <AppContext.Provider value={{ 
+                                        searchKey: appState.searchKey, 
+                                        searchResults: appState.searchResults, 
+                                        searchNum: appState.searchNum, 
+                                        previewGif: appState.previewGif, 
+                                        featuredGifs : appState.featuredGifs, 
+                                        stateDispatcher
+                                        }}>
                 { props.children }
-            </SearchContext.Provider>
+            </AppContext.Provider>
 }
 
-export default SearchContextProvider;
+export default AppContextProvider;

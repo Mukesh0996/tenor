@@ -3,93 +3,175 @@ import SearchBarStyles from './Searchbar.module.css';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useEffect, useState } from 'react';
 import useFetch from '../../Hooks/useFetch';
-import { SearchContext } from '../../Store/SearchContext';
+import { AppContext } from '../../Store/SearchContext';
 import Loading from '../Loading/Loading';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SearchBar = () => {
 
-    const { searchKey, setSearchResults, setSearchKey, searchResults , setSearchNum} = useContext(SearchContext);
-    const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const { searchKey, featuredGifs, stateDispatcher} = useContext(AppContext);
+
+    const [searchSuggestions, setSearchSuggestions] = useState({ suggestions:[], suggestionIndex: -1});
 
     const { isLoading, sendRequest } = useFetch(process.env.react_app_tenor_url.concat(searchKey)); 
     const {isLoading: searchLoading, sendRequest: fetchSearchSuggestions } = useFetch(process.env.react_app_tenor_search_suggestions_url.concat(searchKey));
-
     const navigate = useNavigate();
+
+    //function to clear search input and search suggestions
+    const clearSearchkey = () => stateDispatcher({type:'RESET_SEARCH_KEY'})
+    const clearSearchSuggestion = () =>  setSearchSuggestions({suggestions:[],suggestionIndex:-1});
 
     // function to fetch gifs from server using useFetch custom hook
     const fetchGifs = async (e) => {
-        console.log('executing');
+      
         if(e !== undefined) {
             e.preventDefault();
         }
 
        const response = await sendRequest();
-       setSearchNum(response.next);
+
+       stateDispatcher({ type: 'SET_SEARCH_NUM', value:response.next});
+       stateDispatcher({type: 'SET_SEARCH_RESULTS', value: response.results});
        navigate('/search-results');
-       setSearchResults(searchResults.concat(response.results));
     }
 
     // fires when we change the value in the field to set the searchKey
     const onChangeHandler = (e) => {
-        e.preventDefault();
-        setSearchKey(e.target.value);
-    }
+        e.preventDefault();  
 
-    // fires when key is released 
-    const keyUpHandler = (e) => {
-        e.preventDefault();
+        stateDispatcher({type:'SET_SEARCH_KEY', value: e.target.value})
 
-        // fetch gifs only if the pressed key is 'Enter'
-        if(e.key === 'Enter'){ 
-            fetchGifs();
-            setSearchSuggestions([]);
-
-            if(searchResults.length > 0) {
-
-                setSearchKey("");
-            }
+        if(e.key==='Escape') {
+            clearSearchkey();
+            clearSearchSuggestion();    
         }
 
+        if(searchKey.length < 1) {
+            clearSearchSuggestion();
+        }
     }
 
-    // fires when the mouse is clicked
-    const mouseUpHandler = (e) => {
+    const getSearchSuggestionsFromGifs = () => {
 
+            const getDescriptions = featuredGifs.map(gif=> gif.content_description);
+
+            const getFilter = getDescriptions.filter((description)=> {
+
+                if(description.toLowerCase().split(" ").join("").includes(searchKey.toLowerCase())) {
+                    return description
+                }
+            })
+
+            setSearchSuggestions((prevState)=> {
+                return {
+                    suggestions: getFilter,
+                    suggestionIndex: prevState.suggestionIndex
+                }
+               });
+    }
+
+    // fires when the key is clicked on search icon
+    const mouseUpHandler = (e) => {
         e.preventDefault();
+
         if(searchKey.length > 0 )  fetchGifs();
        
     }
 
-    // function to get suggestions from tenor server
-    const getSearchSuggestions = async () => {
+    const keyUpHandler = (e) => {
+        e.preventDefault();
 
-       let data = await fetchSearchSuggestions();
-       setSearchSuggestions(data.results);
+        // clear search when esc key is pressed
+
+        if(e.key === 'Backspace' && searchKey.length < 1) {
+            clearSearchSuggestion();
+        }
+
+        if(e.key === 'Escape') {
+          clearSearchkey();
+          clearSearchSuggestion();
+        }
+
+        // highlight suggestion by tapping down arrow
+        if(e.key === 'ArrowDown') {
+            setSearchSuggestions((prevState) => {
+
+                return {
+                    suggestions: prevState.suggestions,
+                    suggestionIndex: Math.min(prevState.suggestionIndex + 1, prevState.suggestions.length - 1)
+                }
+
+            });
+        }
+
+        // highlight suggestion by tapping up arrow
+        if(e.key === 'ArrowUp') {
+            setSearchSuggestions((prevState) => {
+
+                return {
+                    suggestions: prevState.suggestions,
+                    suggestionIndex: Math.max(prevState.suggestionIndex - 1, -1)
+                }
+            });
+        }
+
+        // set search 
+        if(e.key === 'Enter') {
+          stateDispatcher({type:'SET_SEARCH_KEY', value: searchSuggestions.suggestions[searchSuggestions.suggestionIndex]})
+        //   clearSearchSuggestion();
+        }
+    }
+
+    const iconPresspHandler = (e) => {
+        e.preventDefault();
+
+        if(e.key === 'Enter' && searchKey.length > 0) {
+            fetchGifs();
+        }
+
+        // if(searchSuggestions.suggestions.length > 0) {
+            clearSearchSuggestion();
+        // }
 
     }
 
-    const tapSearchkey = (searchKey) => {
+    // function to get suggestions from tenor server
+    const getNewSearchSuggestions = async () => {
 
-        setSearchKey(searchKey);
+            let data = await fetchSearchSuggestions();
+
+            setSearchSuggestions(prevState => {
+             return {
+                 ...prevState,
+                 suggestions: data.results
+             }});
+      
+    }
+
+    const tapSearchkey = (searchsuggestion) => {
+        stateDispatcher({type:'SET_SEARCH_KEY', value: searchsuggestion});
 
         fetchGifs();
-        // reset search key and search suggestions
-        setSearchSuggestions([]);
+
+        //reset to default state
+        clearSearchSuggestion();
     }
 
     //debouncing by creating a delay of .5s
     useEffect( () => {
+
+        if(searchKey.length > 0  ) {
+            getSearchSuggestionsFromGifs();
+        }
+
         let timer;
+        timer =  setTimeout(() => {
+            
+            if( searchSuggestions.suggestions.length === 0 && searchKey.length > 0 ) {
+                getNewSearchSuggestions();
+            }
 
-         timer =  setTimeout(() => {
-
-            if(searchKey.length > 0)  getSearchSuggestions();
-          
-       }, 500);
-
+       }, 1000);
        return () => clearTimeout(timer);
     }, [searchKey]);
 
@@ -107,22 +189,29 @@ const SearchBar = () => {
                                     name='search_value'
                                     value={searchKey} 
                                     onChange={onChangeHandler} 
-                                    onKeyUp={(e) => setSearchSuggestions([])}
+                                    onKeyUp={keyUpHandler}
+                                    onBlur={(e)=> { 
+                                        e.preventDefault();
+                                        if(searchSuggestions.suggestions.length > 0) {
+                                            clearSearchSuggestion();
+                                        }
+                                     }}
                                 />
-                                <div className={SearchBarStyles.searchIcon} tabIndex={0} onMouseUp={mouseUpHandler} onKeyUp={keyUpHandler}>
+                                <div className={SearchBarStyles.searchIcon} tabIndex={0} onMouseUp={mouseUpHandler} onKeyUp={iconPresspHandler}>
                                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                                 </div>
                             </div>
                         </form>
-                        { (searchSuggestions.length > 0) && <div className={SearchBarStyles.searchSuggestions}>
+                        { 
+                        ( searchSuggestions.suggestions.length > 0 ) && <div className={SearchBarStyles.searchSuggestions}>
                             <ul>
                                 {
-                                    searchSuggestions.map((searchsuggestion, index)=> {
-
+                                    searchSuggestions.suggestions.map((searchsuggestion, index)=> {
                                     return  <li key={index} 
-                                                onClick={(e)=>{ tapSearchkey(searchsuggestion)}}>
-                                                {searchsuggestion}
-                                            </li>
+                                                className={index === searchSuggestions.suggestionIndex ? SearchBarStyles.selected: ''}
+                                                onClick={(e)=> tapSearchkey(searchsuggestion)}>
+                                                { searchsuggestion }
+                                            </li>;
                                     })
                                 }
                             </ul>
