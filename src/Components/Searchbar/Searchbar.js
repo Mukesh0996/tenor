@@ -193,7 +193,9 @@ const SearchBar = () => {
                                     onBlur={(e)=> { 
                                         e.preventDefault();
                                         if(searchSuggestions.suggestions.length > 0) {
-                                            clearSearchSuggestion();
+                                            setTimeout(() => {
+                                                clearSearchSuggestion();
+                                            }, 500)
                                         }
                                      }}
                                 />
@@ -209,7 +211,7 @@ const SearchBar = () => {
                                     searchSuggestions.suggestions.map((searchsuggestion, index)=> {
                                     return  <li key={index} 
                                                 className={index === searchSuggestions.suggestionIndex ? SearchBarStyles.selected: ''}
-                                                onClick={(e)=> {e.preventDefault(); tapSearchkey(searchsuggestion)}}>
+                                                onClick={(e)=> {tapSearchkey(searchsuggestion)}}>
                                                 { searchsuggestion }
                                             </li>;
                                     })
